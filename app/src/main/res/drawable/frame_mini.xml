@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+    android:oneshot="false"
+    <item android:drawable="@drawable/mini_0"
+        android:duration="100" />
+
+    <item android:drawable="@drawable/mini_3"
+        android:duration="100" />
+
+    <item android:drawable="@drawable/mini_5"
+        android:duration="100" />
+
+    <item android:drawable="@drawable/mini_7"
+        android:duration="100" />
+    <item android:drawable="@drawable/mini_9"
+        android:duration="100" />
+    <item android:drawable="@drawable/mini_13"
+        android:duration="100" />
+
+    <item android:drawable="@drawable/mini_15"
+        android:duration="100" />
+
+
+    <item android:drawable="@drawable/mini_19"
+        android:duration="100" />
+
+    <item android:drawable="@drawable/mini_21"
+        android:duration="100" />
+
+    <item android:drawable="@drawable/mini_23"
+        android:duration="1500" />
+    <item android:drawable="@drawable/mini_21"
+        android:duration="100" />
+    <item android:drawable="@drawable/mini_17"
+        android:duration="100" />
+
+    <item android:drawable="@drawable/mini_13"
+        android:duration="100" />
+    <item android:drawable="@drawable/mini_9"
+        android:duration="100" />
+    <item android:drawable="@drawable/mini_7"
+        android:duration="100" />
+    <item android:drawable="@drawable/mini_3"
+        android:duration="100" />
+    <item android:drawable="@drawable/mini_0"
+        android:duration="100" />
+
+</animation-list>

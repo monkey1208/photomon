@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.LightingColorFilter;
 import android.graphics.Matrix;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView text_analyze;
     private ImageView image_photo;
     private RelativeLayout back_ground;
+    public String status;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,9 +63,11 @@ public class MainActivity extends AppCompatActivity {
         text_analyze = (TextView) findViewById(R.id.text_analyze);
         image_photo = (ImageView) findViewById(R.id.image_photo);
         back_ground = (RelativeLayout) findViewById(R.id.background);
-        Drawable icon = getResources().getDrawable(R.drawable.apple_logo);
-        ColorFilter filter = new LightingColorFilter(Color.RED, Color.BLUE);
+        status = "egg";
+        Drawable icon = getResources().getDrawable(R.drawable.egg);
+        ColorFilter filter = new LightingColorFilter(Color.RED, Color.YELLOW);
         icon.setColorFilter(filter);
+        //makeanimation();
         mon.setImageDrawable(icon);
 
         mon.setOnClickListener(mon_click);
@@ -101,6 +105,58 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    private void makeanimation(int id){
+        System.out.println("anim");
+        AnimationDrawable ad = (AnimationDrawable) getResources().getDrawable(id);
+        mon.setBackgroundDrawable(ad);
+        ad.start();
+        //thread = new Thread(anim_thread);
+        //thread.start();
+    }
+    private Runnable anim_thread = new Runnable() {
+        @Override
+        public void run() {
+            AnimationDrawable ad = (AnimationDrawable) getResources().getDrawable(R.drawable.frame_mini);
+            mon.setBackgroundDrawable(ad);
+            ad.start();
+
+        }
+    };
+    private void change(int []rgb, int color){
+        if(status.equals("egg")) {
+            mon.setImageResource(0);
+
+            if (rgb[0] >= rgb[1]+10 && rgb[0] >= rgb[2]) {
+                System.out.println("R");
+                status = "mini";
+                makeanimation(frame_id("mini"));
+
+            } else if (rgb[1] > rgb[0]-10 && rgb[1] >= rgb[2]) {
+                System.out.println("G");
+                status = "chi";
+                makeanimation(frame_id("chi"));
+
+            } else {
+                Drawable icon = getResources().getDrawable(R.drawable.egg);
+                ColorFilter filter = new LightingColorFilter(color, color);
+                icon.setColorFilter(filter);
+                mon.setImageDrawable(icon);
+
+            }
+        }
+
+
+    }
+    private int frame_id(String input){
+        switch (input){
+            case "mini":
+                return R.drawable.frame_mini;
+            case "chi":
+                return R.drawable.frame_chi;
+        }
+        return R.drawable.frame_chi;
+
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -115,9 +171,11 @@ public class MainActivity extends AppCompatActivity {
                 Image_process ip = new Image_process();
                 int [] rgb = ip.image_analyze(image);
                 text_analyze.setText("r:"+rgb[0]+" g:"+rgb[1]+" b:"+rgb[2]+" a:"+rgb[3]);
-                image_photo.setImageBitmap(image);
+                //image_photo.setImageBitmap(image);
+                image.recycle();
                 int color = Color.argb(rgb[3] ,rgb[0], rgb[1], rgb[2]);
-                back_ground.setBackgroundColor(color);
+                //back_ground.setBackgroundColor(color);
+                change(rgb, color);
             } catch (FileNotFoundException e) {
                 Toast.makeText(MainActivity.this, "fail_to_get _photo", Toast.LENGTH_LONG);
                 e.printStackTrace();

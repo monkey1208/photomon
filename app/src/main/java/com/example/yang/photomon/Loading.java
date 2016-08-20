@@ -22,7 +22,7 @@ public class Loading extends AppCompatActivity {
         loading_anim();
     }
     private void loading_anim(){
-        ImageView img = (ImageView) findViewById(R.id.image_loading_ic);
+        /*ImageView img = (ImageView) findViewById(R.id.image_loading_ic);
         View parentView = (View)img.getParent();
         TranslateAnimation anim = new TranslateAnimation(0.0f, 800.0f, 0.0f,0.0f);
         System.out.println("parentwidth="+parentView.getWidth()+" imgwidth="+img.getWidth());
@@ -31,7 +31,7 @@ public class Loading extends AppCompatActivity {
         anim.setStartOffset(500);
         anim.setRepeatMode(Animation.RESTART);
         anim.setRepeatCount(Animation.INFINITE);
-        img.startAnimation(anim);
+        img.startAnimation(anim);*/
     }
     public class timertask extends TimerTask{
 
